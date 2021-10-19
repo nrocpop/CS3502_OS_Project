@@ -1,3 +1,4 @@
-//offload inactive processes to disk to free up memory space
+//Loader loads programs into disk;
 public class Disk {
+    private byte[] storage = new byte[2048];
 }

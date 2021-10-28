@@ -1,10 +1,10 @@
 public class CPU {
-    
+    //gets the individual bits that make up a byte.true = 1 and false = 0;
     private static boolean bitsFromByte(byte b, int bit){
         return(b &(1<<bit)) != 0 ;
     }
     private static void updateCache(){
-        
+
     }
     int id;
     PCB myPcb;
@@ -42,7 +42,7 @@ public class CPU {
         for (int i = 0; i < 4 ; i++)
         fetchTo[toAddress] = myMemory.load(address+i);
     }
-    
+    //decodes the bytes of an instruction into binary
     public void Decode(byte[] instruction){
         int count = 0;
         for(int i = 0; i <= instruction.length-1;i++){
@@ -58,6 +58,8 @@ public class CPU {
             }
         }
     }
+
+    //execute the instruction on the IR
     public void Execute(int[] IR,PCB program){
         switch(IR[1] + IR[2]){
             case 0:
@@ -75,7 +77,7 @@ public class CPU {
 
         }
     }
-
+    //constructor
     public CPU(int cpuId){
         id = cpuId;
         myPcb = new PCB(cpuId);

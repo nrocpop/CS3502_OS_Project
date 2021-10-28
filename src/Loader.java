@@ -10,6 +10,7 @@ public class Loader {
     //using hex values (for example 17 = 23 and a = 10)
     //Job instructions are store in memory and Data is stored on the PCB
     static final File code = new File("C:\\Users\\xbato\\Desktop\\Code.txt");
+
     Loader(Memory sysMemory,Disk sysDisk, PCB[] programArray) throws IOException {
         int memoryLocation = 0;
         Scanner reader = new Scanner(code);

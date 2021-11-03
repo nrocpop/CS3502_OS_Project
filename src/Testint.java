@@ -1,8 +1,14 @@
 
 
 public class Testint {
-    private static boolean bitsFromByte(byte b, int bit){
+    private static boolean bitsFromByteBool(byte b, int bit){
         return(b & (1<<bit)) != 0 ;
+    }
+    private static int bitsFromByteInt(byte b,int bit){
+        if((b & (1<<bit)) != 0){
+            return 1;
+        }
+        else return 0;
     }
 
     static int binToDecimal(int[] array){
@@ -24,7 +30,25 @@ public class Testint {
         return result;
     }
     public static void main(String[] args) {
+        System.out.println("Conversions...");
+        int twoSix = 26;
+        byte bt = (byte)twoSix;
+        System.out.println(bt);
+        int[] t = new int[8];
+        for (int i = 7; i >= 0; i--) {
+            if (bitsFromByteInt(bt, i) != 0) {
+                System.out.print(1);
+                t[i] = 1;
+            } else {
+                System.out.print(0);
+                t[i] = 0;
+            }
+        }
+        System.out.println("\n" + binToDecimal(t));
 
+
+
+        System.out.println("\nArray Tests");
         int[] arr_a = {0,1,1,0,1,0};//1a = 26
         int[] arr_b = {0,0,0,1,1,0};//6 = 6
         int[] arr_d = {0,0,1,1,0,1};//D = 13
@@ -39,7 +63,7 @@ public class Testint {
         byte[] bytes = {-64,80,0,92};//11000000010100000000000001011100
         for(int i = 0; i <= bytes.length-1;i++){
                 for (int j = 7; j >= 0; j--) {
-                    if (bitsFromByte(bytes[i], j)) {
+                    if (bitsFromByteBool(bytes[i], j)) {
                         System.out.print(1);
                     } else {
                         System.out.print(0);

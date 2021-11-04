@@ -1,14 +1,33 @@
 
 
 public class Testint {
-    private static boolean bitsFromByteBool(byte b, int bit){
+    private static boolean bitsFromByte(byte b, int bit){
         return(b & (1<<bit)) != 0 ;
     }
-    private static int bitsFromByteInt(byte b,int bit){
-        if((b & (1<<bit)) != 0){
-            return 1;
+    private static boolean bitsFromInt(int i, int bit){
+        return(i & (1<<bit)) != 0 ;
+    }
+    static void byteToBinary( byte byteVal, int[] bits){
+        for (int i = 7; i >= 0; i--) {
+            if (bitsFromByte(byteVal, i)) {
+                System.out.print(1);
+                bits[7-i] = 1;
+            } else {
+                System.out.print(0);
+                bits[7-i] = 0;
+            }
         }
-        else return 0;
+    }
+    static void intToBinary( int value, int[] bits){
+        for (int i = 31; i >= 0; i--) {
+            if (bitsFromInt(value, i)) {
+                System.out.print(1);
+                bits[31-i] = 1;
+            } else {
+                System.out.print(0);
+                bits[31-i] = 0;
+            }
+        }
     }
 
     static int binToDecimal(int[] array){
@@ -31,20 +50,17 @@ public class Testint {
     }
     public static void main(String[] args) {
         System.out.println("Conversions...");
-        int twoSix = 26;
-        byte bt = (byte)twoSix;
+        int NumberTest = 93;
+        byte bt = (byte)NumberTest;
         System.out.println(bt);
         int[] t = new int[8];
-        for (int i = 7; i >= 0; i--) {
-            if (bitsFromByteInt(bt, i) != 0) {
-                System.out.print(1);
-                t[i] = 1;
-            } else {
-                System.out.print(0);
-                t[i] = 0;
-            }
-        }
-        System.out.println("\n" + binToDecimal(t));
+        byteToBinary((byte)NumberTest,t);
+        System.out.println("\n" + binToDecimal(t)+"\n");
+        int ITB = 1000000000;
+        int[] u = new int[32];
+        intToBinary(ITB,u);
+
+
 
 
 
@@ -63,7 +79,7 @@ public class Testint {
         byte[] bytes = {-64,80,0,92};//11000000010100000000000001011100
         for(int i = 0; i <= bytes.length-1;i++){
                 for (int j = 7; j >= 0; j--) {
-                    if (bitsFromByteBool(bytes[i], j)) {
+                    if (bitsFromByte(bytes[i], j)) {
                         System.out.print(1);
                     } else {
                         System.out.print(0);

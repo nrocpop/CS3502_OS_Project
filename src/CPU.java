@@ -171,10 +171,32 @@ public class CPU {
                 intToBinary(divResult,Dreg);
                 break;
             case 9://AND R Logical AND of two S-regs into D-reg
+                for(int i = 0;i < 32; i++){
+                    if(Sreg1[i] == 1 && Sreg2[i] == 1){
+                        Dreg[i] = 1;
+                    }
+                    else{
+                        Dreg[i] = 0;
+                    }
+                }
                 break;
             case 10://OR R Logical OR of two S-regs into D-reg
+                for(int i = 0;i < 32; i++){
+                    if(Sreg1[i] == 1 || Sreg2[i] == 1){
+                        Dreg[i] = 1;
+                    }
+                    else{
+                        Dreg[i] = 0;
+                    }
+                }
                 break;
             case 11://MOVI I Transfers address/data directly into a register
+                for (int i = 0; i < 4 ; i++) {
+                    for (int j = 0; j < 7; j++) {
+
+                    }
+                }
+
                 break;
             case 12://ADDI I Adds a data value directly to the content of a register
                 break;

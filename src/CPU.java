@@ -84,7 +84,7 @@ public class CPU {
     public void Fetch(int address){
         byte[] instruction = new byte[4];
         for (int i = 0; i < 4; i++) {
-           instruction[i] = myMemory.load(i);
+           instruction[i] = myMemory.load(i+address);
         }
         cache = instruction.clone();
     }
@@ -102,11 +102,14 @@ public class CPU {
                 }
                 count++;
             }
+
         }
+        System.out.print("\n");
     }
 
     //execute the instruction on the IR
-    public void Execute(int[] IR,PCB program){
+    public void Execute(){
+        int [] IR = instructionRegister;
         short opCode = -1;
         int[] Sreg1 = Registers[0];
         int[] Sreg2 = Registers[0];
@@ -114,7 +117,7 @@ public class CPU {
         int[] Breg = Registers[0];
         int address = -1;
 
-        switch(IR[1] + IR[2]){
+        switch(IR[0] + IR[1]){
 
             case 0:
                 //arithmetic
@@ -129,7 +132,7 @@ public class CPU {
                 if(IR[0] == 0){
                 Breg = Registers[binToDecimal(IR,8,11)];
                 Dreg = Registers[binToDecimal(IR,12,15)];
-                address = binToDecimal(IR,15,31);
+                address = binToDecimal(IR,16,31);
 
                 }
                 //unconditional jump
@@ -280,8 +283,9 @@ public class CPU {
         }
     }
     //constructor
-    public CPU(int cpuId){
+    public CPU(int cpuId,Memory mem){
         id = cpuId;
+        myMemory = mem;
     }
 
 

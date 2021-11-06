@@ -6,12 +6,20 @@ public class Driver {
 
 
     public static void main(String[] args) throws IOException {
+        int count = 0;
+        int memlocation = 0;
         Memory systemMemory = new Memory(1024);
         Disk systemDisk = new Disk(2048);
         PCB[] programList =  new PCB[50];
         Loader load = new Loader(systemMemory,systemDisk,programList);
-        CPU myCpu = new CPU(1);
-        int nextAdd =0;
+        CPU myCpu = new CPU(1,systemMemory);
+        while(count <= 75){
+        myCpu.Fetch(memlocation);
+        memlocation += 4;
+        myCpu.Decode(myCpu.cache);
+        myCpu.Execute();
+        count++;
+        }
         System.out.println("\nMEMORY");
         for (int i = 0; i < 1024; i++) {
             System.out.print(systemMemory.load(i) + "|");

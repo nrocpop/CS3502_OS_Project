@@ -12,10 +12,10 @@ public class Loader {
 
     Loader(Memory sysMemory,Disk sysDisk, PCB[] programArray) throws IOException {
 
-
+        int Base = 0;
         int memoryLocation = 0;
         int dataLocation = 0;
-        int Base = 0;
+
         boolean JobSection = false;
         int pcbCount = 0;
         PCB p = null;
@@ -50,11 +50,9 @@ public class Loader {
 
 
             }
-            else{
-                System.out.print(instruction);
+            else{//Load instructions into disk(Using memory for testing)
                 String[] arr = instruction.split("x");
                 if(JobSection){//Load Instructions into memory
-                    System.out.print(" -> " + arr[1]);
                     String [] hexSplit = arr[1].split("(?<=\\G..)");
                     for (int i = 0; i < hexSplit.length; i++) {
                         byte b = (byte)((Character.digit((hexSplit[i].charAt(0)),16) << 4)+

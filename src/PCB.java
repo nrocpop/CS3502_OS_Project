@@ -3,18 +3,25 @@ public class PCB {
     public int cpuId;//Id of the assigned cpu
     public int BaseRegister;
     public int programCounter;//holds the address of the instruction to fetch
-    int state;//record saved on interrupt
+    public int programID;
+    public int state;//record saved on interrupt
     public int codeSize;//length from //job control line
-    int accounts;
-    int memories;//Pagetable base, pages, pagesize
-    int resources;//
-    int status;//is program running, ready, blocked etc
-    int statusInfo;
-    int priority;//job priority from the control line
-
-    public PCB(int id){
-        cpuId = id;
-        programCounter = 0;
+    public int accounts;
+    public int memories;//Pagetable base, pages, pagesize
+    public int resources;//
+    public int status;//is program running, ready, blocked etc
+    public int statusInfo;
+    public int priority;//job priority from the control line
+    public int inputBufferSize;
+    public int outputBufferSize;
+    public int tempBuffersSize;
+    public byte[] data;
+    public PCB(){
+        data = new byte[256];
     }
+    public void store(byte value, int address){
+        data[address] = value;
+    }
+
 
 }

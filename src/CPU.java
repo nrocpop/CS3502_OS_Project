@@ -3,6 +3,7 @@ public class CPU {
     private static boolean bitsFromByte(byte b, int bit){
         return(b &(1<<bit)) != 0 ;
     }
+    //Get the bits that make up an integer
     private static boolean bitsFromInt(int i, int bit){
         return(i & (1<<bit)) != 0 ;
     }
@@ -17,6 +18,7 @@ public class CPU {
             }
         }
     }
+    //Conversion from Binary to other bases
     static int binToDecimal(int[] array){
         int result = 0;
         int power = (int)Math.pow(2, array.length-1);
@@ -34,6 +36,32 @@ public class CPU {
             power = power/2;
         }
         return result;
+    }
+    //Conversion from bytes to numbers
+    static void byteToBinary(byte byteVal, int[] bits){
+        for (int i = 7; i >= 0; i--) {
+            if (bitsFromByte(byteVal, i)) {
+                System.out.print(1);
+                bits[7-i] = 1;
+            } else {
+                System.out.print(0);
+                bits[7-i] = 0;
+            }
+        }
+    }
+    public static void byteArrayToBinary(byte[] bytes, int[] binary){
+        int BL = 0;
+        int BR = 7;
+        int [] temp = new int[8];
+        for (int i = 0; i < bytes.length; i++) {
+            byteToBinary(bytes[i],temp);
+            for (int j = BL; j <= BR  ; j++) {//0-7,8-15,16-23,24-31
+                binary[j] = temp[j-BL];
+            }
+            BL += 8;
+            BR += 8;
+        }
+
     }
     private static void updateCache(){
 

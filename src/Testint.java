@@ -20,6 +20,20 @@ public class Testint {
             }
         }
     }
+    public static void byteArrayToBinary(byte[] bytes, int[] binary){
+    int BL = 0;
+    int BR = 7;
+    int [] temp = new int[8];
+        for (int i = 0; i < bytes.length; i++) {
+            byteToBinary(bytes[i],temp);
+            for (int j = BL; j <= BR  ; j++) {//0-7,8-15,16-23,24-31
+                binary[j] = temp[j-BL];
+            }
+            BL += 8;
+            BR += 8;
+        }
+
+    }
 
     static void intToBinary( int value, int[] bits){
         for (int i = 31; i >= 0; i--) {
@@ -62,13 +76,21 @@ public class Testint {
         byteToBinary((byte)NumberTest,t);
         System.out.println("\nConversion from Binary to Decimal: " + binToDecimal(t));
 
-        System.out.println("\nint to binary...\nFrom Method:");
+        System.out.println("int to binary...\nFrom Method:");
         int ITB = 1000000000;
         int[] u = new int[32];
         intToBinary(ITB,u);
         System.out.println("\nArray content");
         for (int i = 0; i < u.length; i++) {
             System.out.print(u[i]);
+        }
+        System.out.println("\nHex String Converted to bytes:\nC0, 50, 00, 5C");
+        String[] hex = {"C0","50","00","5C"};
+        byte[] b = new byte[4];
+        for (int i = 0; i < hex.length; i++){
+            b[i] = (byte)((Character.digit((hex[i].charAt(0)),16) << 4)+
+                    (Character.digit((hex[i].charAt(1)),16)));
+            System.out.print(b[i] + ", ");
         }
 
         System.out.println("\nArray Tests");
@@ -85,11 +107,12 @@ public class Testint {
         int[] binary = new int[32];
         byte[] bytes = {-64,80,0,92};//
         System.out.println("Calculating binary from Bytes {-64,80,0,92}\n From Method: ");
-        //byteArrayToBinary(bytes,binary);
+        byteArrayToBinary(bytes,binary);
         System.out.println("\nBinary Array bits: ");
         for (int i = 0; i < 32; i++) {
             System.out.print(binary[i]);
         }
+
 //        for(int i = 0; i <= bytes.length-1;i++){
 //                for (int j = 7; j >= 0; j--) {
 //                    if (bitsFromByte(bytes[i], j)) {
@@ -100,13 +123,7 @@ public class Testint {
 //                }
 //
 //                }
-        String[] hex = {"C0","50","00","5C"};
-        byte[] b = new byte[4];
-        for (int i = 0; i < hex.length; i++){
-            b[i] = (byte)((Character.digit((hex[i].charAt(0)),16) << 4)+
-                        (Character.digit((hex[i].charAt(1)),16)));
-            System.out.println(b[i]);
-        }
+
 
 
             }

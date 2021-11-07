@@ -1,6 +1,6 @@
 import java.util.Queue;
  class LongScheduler {
-    String processState = "";
+    public String processState = "";
     boolean IO; //placeholder boolean for IO checks
     int process;
     Queue<Integer>ready;    //placeholder ready process queue
